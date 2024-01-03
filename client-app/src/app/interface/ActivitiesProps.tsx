@@ -1,5 +1,9 @@
 import { Activity } from "../models/activity";
 
 export default interface ActivitiesProps {
-    activities: Activity[]
+    activities: Activity[];
+}
+
+export interface ActivityProps {
+    activity: Activity;
 }
