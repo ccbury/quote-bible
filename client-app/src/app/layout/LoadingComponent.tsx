@@ -11,7 +11,7 @@ export default function LoadingComponent(
         <Dimmer
             active={true}
             inverted={inverted}>
-            <Loader content={content} />
+            <Loader content={content} size='massive' />
         </Dimmer>
     )
 }
