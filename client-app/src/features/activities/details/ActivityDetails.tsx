@@ -7,10 +7,13 @@ interface Props {
     openForm: (id: string) => void;
 }
 
-export default function ActivityDetails({ activity, cancelSelectActivity, openForm }: Props) {
+export default function ActivityDetails(
+    { activity, cancelSelectActivity, openForm }: Props) {
     return (
-        <Card fluid>
-            <Image src={`/assets/cetegoryImage/${activity.category}.jpg`} />
+        <Card
+            fluid>
+            <Image
+                src={`/assets/cetegoryImage/${activity.category}.jpg`} />
             <Card.Content>
                 <Card.Header>{activity.title}</Card.Header>
                 <Card.Meta>
@@ -20,10 +23,20 @@ export default function ActivityDetails({ activity, cancelSelectActivity, openFo
                     {activity.description}
                 </Card.Description>
             </Card.Content>
-            <Card.Content extra>
-                <Button.Group widths='2'>
-                    <Button onClick={() => openForm(activity.id)} basic color='blue' content='Edit' />
-                    <Button onClick={cancelSelectActivity} basic color='grey' content='Cancel' />
+            <Card.Content
+                extra>
+                <Button.Group
+                    widths='2'>
+                    <Button
+                        onClick={() => openForm(activity.id)}
+                        basic
+                        color='blue'
+                        content='Edit' />
+                    <Button
+                        onClick={cancelSelectActivity}
+                        basic
+                        color='grey'
+                        content='Cancel' />
                 </Button.Group>
             </Card.Content>
         </Card>

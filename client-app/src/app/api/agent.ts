@@ -21,7 +21,7 @@ axios.interceptors.response.use(async (response) => {
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 
-const request = {
+const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
   post: <T>(url: string, body: object) =>
     axios.post<T>(url, body).then(responseBody),
@@ -31,7 +31,12 @@ const request = {
 };
 
 const Activities = {
-  list: () => request.get<Activity[]>("/activities"),
+  list: () => requests.get<Activity[]>("/activities"),
+  details: (id: string) => requests.get<Activity>(`/activities/${id}`),
+  create: (activity: Activity) => axios.post<void>("/activities", activity),
+  update: (activity: Activity) =>
+    axios.put<void>(`/activities/${activity.id}`, activity),
+  delete: (id: string) => axios.delete<void>(`/activities/${id}`),
 };
 
 const agent = {
