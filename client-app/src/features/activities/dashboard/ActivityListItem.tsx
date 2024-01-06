@@ -14,7 +14,7 @@ export default function ActivityListItem({ activity }: Props) {
                     <Item>
                         <Item.Image size='tiny' circular src='/assets/user.png' />
                         <Item.Content>
-                            <Item.Header as={Link} to={`/activites/${activity.id}`}>
+                            <Item.Header as={Link} to={`/activities/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
                             <Item.Description>Hosted By Conor</Item.Description>
@@ -35,7 +35,7 @@ export default function ActivityListItem({ activity }: Props) {
                 <span>{activity.description}</span>
                 <Button
                     as={Link}
-                    to={`/activites/${activity.id}`}
+                    to={`/activities/${activity.id}`}
                     color='teal'
                     floated='right'
                     content='View' />
