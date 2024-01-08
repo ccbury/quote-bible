@@ -9,20 +9,26 @@ export default function NavBar() {
             inverted
             fixed='top' >
             <Container>
+                <img
+                    src='assets/bible.png'
+                    alt='logo'
+                    height="35em"
+                    width="35em"
+                    style={{ marginTop: 'auto', marginBottom: 'auto', marginRight: '3rem' }} />
                 <Menu.Item
                     as={NavLink}
                     to='/'
                     header>
-                    <img
-                        src='assets/react.svg'
-                        alt='logo'
-                        style={{ marginRight: '1rem' }} />
-                    Reactivities
+                    Home
                 </Menu.Item>
                 <Menu.Item
                     as={NavLink}
                     to='/activities'
                     name='Activities' />
+                <Menu.Item
+                    as={NavLink}
+                    to='/errors'
+                    name='Errors' />
                 <Menu.Item>
                     <Button
                         as={NavLink}
