@@ -7,7 +7,7 @@ namespace API.DTOs
         [Required]
         public string Email { get; set; }
         [Required]
-        [RegularExpression("(?=.*\\d)(?=.&[a-z])(?=.*[A-Z]).{4,64}$", ErrorMessage = "Password must be over 4 Characters, a number and capital leter are required.")]
+        [RegularExpression("(?=.*[^A-Za-z])(?=.*[A-Z])(?=.*[a-z]).{4,}$", ErrorMessage = "Password must be over 4 Characters, a number and capital leter are required.")]
         public string Password { get; set; }
         [Required]
         public string DisplayName { get; set; }
