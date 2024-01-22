@@ -14,21 +14,21 @@ namespace Persistence
                 {
                     new AppUser
                     {
-                        DisplayName = "Bob",
-                        UserName = "bob",
-                        Email = "bob@test.com"
-                    },
-                    new AppUser
-                    {
-                        DisplayName = "Jane",
-                        UserName = "jane",
-                        Email = "jane@test.com"
-                    },
-                    new AppUser
-                    {
                         DisplayName = "Tom",
                         UserName = "tom",
                         Email = "tom@test.com"
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "Dick",
+                        UserName = "dick",
+                        Email = "dick@test.com"
+                    },
+                    new AppUser
+                    {
+                        DisplayName = "Harry",
+                        UserName = "harry",
+                        Email = "harry@test.com"
                     },
                 };
 

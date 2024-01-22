@@ -1,8 +1,10 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Header, Item, Segment, Image } from 'semantic-ui-react'
+import { Button, Header, Item, Segment, Image, Label } from 'semantic-ui-react'
 import { Activity } from "../../../app/models/activity";
 import { Link } from 'react-router-dom';
 import { format } from 'date-fns';
+import { useStore } from '../../../app/stores/store';
+import { useState } from 'react';
 
 const activityImageStyle = {
     filter: 'brightness(30%)'
@@ -22,9 +24,17 @@ interface Props {
 }
 
 export default observer(function ActivityDetailedHeader({ activity }: Props) {
+    const { activityStore: { updateAttendance, loading, deleteActivity } } = useStore();
+    const [deleteFlag, setDeleteFlag] = useState(false);
+    const toggleDeleteFlag = async () => {
+        setDeleteFlag(!deleteFlag)
+    };
     return (
         <Segment.Group>
             <Segment basic attached='top' style={{ padding: '0' }}>
+                {activity.isCancelled && (
+                    <Label style={{ position: 'absolute', zIndex: 1000, left: -14, top: 20 }} ribbon color='red' content="Cancelled" />
+                )}
                 <Image src={`/assets/categoryImages/${activity.category}.jpg`} fluid style={activityImageStyle} />
                 <Segment style={activityImageTextStyle} basic>
                     <Item.Group>
@@ -37,7 +47,7 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                                 />
                                 <p>{format(activity.date!, 'dd MMM yyyy')}</p>
                                 <p>
-                                    Hosted by <strong>Bob</strong>
+                                    Hosted by <strong><Link to={`/profiles/${activity.host?.username}`}>{activity.host?.displayName}</Link></strong>
                                 </p>
                             </Item.Content>
                         </Item>
@@ -45,11 +55,18 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                 </Segment>
             </Segment>
             <Segment clearing attached='bottom'>
-                <Button color='teal'>Join Activity</Button>
-                <Button>Cancel attendance</Button>
-                <Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
-                    Manage Event
-                </Button>
+                {activity.isHost ? (
+                    <>
+                        <Button color={'red'} floated='left' basic content={!deleteFlag ? 'Delete Quote' : 'Cancel'} loading={loading} onClick={toggleDeleteFlag} />
+                        {deleteFlag ? (<Button onClick={deleteActivity} as={Link} to={`/activities`} color='red' floated='right'>
+                            Confirm Delete
+                        </Button>) : (<Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
+                            Manage Quote
+                        </Button>)}
+                    </>
+
+                ) : activity.isGoing ? (<Button loading={loading} onClick={updateAttendance}>I Didn't see this Quote</Button>
+                ) : (<Button color='orange' loading={loading} disabled={activity.isCancelled} onClick={updateAttendance}>I saw this Quote!</Button>)}
             </Segment>
         </Segment.Group>
     )
