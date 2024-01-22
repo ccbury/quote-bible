@@ -13,13 +13,11 @@ export default observer(function HomePage() {
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='assets/bible.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
-                    Quote Bible
-                    <Image size='massive' src='assets/quill-pen.png' alt='logo' style={{ marginBottom: 12, marginLeft: 25 }} />
+                    Quotee
                 </Header>
                 {userStore.isLoggedIn ? (
                     <>
-                        <Header as='h2' inverted content='Welcome to Quote Bible' />
-                        <Button as={Link} to='/activities' size='huge' inverted content='Go to Activities' />
+                        <Button as={Link} to='/activities' size='huge' inverted content='Go to Activities' sx={{ mt: '40rem' }} />
                     </>
                 ) : (
                     <>
