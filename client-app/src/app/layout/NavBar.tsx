@@ -36,7 +36,7 @@ export default observer(function NavBar() {
                     <Button
                         as={NavLink}
                         to='/createActivity'
-                        positive
+                        color='orange'
                         content='Create Activity' />
                 </Menu.Item>
                 <Menu.Item position='right'>
