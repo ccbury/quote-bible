@@ -6,10 +6,10 @@ import ActivityList from './ActivityList';
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
 import { useEffect, useState } from 'react';
-import LoadingComponent from '../../../app/layout/LoadingComponent';
 import ActivityFilters from './ActivityFilters';
 import { PagingParams } from '../../../app/models/pagination';
 import InfiniteScroll from 'react-infinite-scroller';
+import ActivityListItemPlaceholder from './ActivityListItemPlaceholder';
 
 export default observer(function ActivityDashboard() {
     const { activityStore } = useStore();
@@ -25,16 +25,22 @@ export default observer(function ActivityDashboard() {
     useEffect(() => {
         if (activityRegistry.size <= 1) loadActivities();
     }, [ loadActivities, activityRegistry ])
-
-    if (activityStore.loadingInitial && !loadingNext) return <LoadingComponent content='Loading Quotes...' />
     return (
         <Grid>
-            <Grid.Column width='10'>
-                <InfiniteScroll pageStart={0} loadMore={handleGetNext} hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages} initialLoad={false}>
-                    <ActivityList />
-                </InfiniteScroll>
+            <Grid.Column width='12'>
+                {activityStore.loadingInitial && !loadingNext && activityRegistry.size === 0 ? (
+                    <>
+                        <ActivityListItemPlaceholder />
+                        <ActivityListItemPlaceholder />
+                    </>
+                ) : (
+                    <InfiniteScroll pageStart={0} loadMore={handleGetNext} hasMore={!loadingNext && !!pagination && pagination.currentPage < pagination.totalPages} initialLoad={false}>
+                        <ActivityList />
+                    </InfiniteScroll>
+                )}
+
             </Grid.Column>
-            <Grid.Column width='6'>
+            <Grid.Column width='4'>
                 <ActivityFilters />
             </Grid.Column>
             <Grid.Column width={10}><Loader active={loadingNext} /></Grid.Column>
