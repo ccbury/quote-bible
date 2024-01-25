@@ -1,9 +1,10 @@
 name: docker-push
 
 on:
-  push:
-    branches:
-      - 'prod'
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - 'prod'
 
 jobs:
   docker:
