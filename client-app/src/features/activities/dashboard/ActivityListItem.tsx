@@ -16,7 +16,7 @@ export default function ActivityListItem({ activity }: Props) {
                     <Item>
                         <Item.Image style={{ marginBottom: 5 }} size='tiny' circular src={activity.host?.image || '/assets/user.png'} />
                         <Item.Content>
-                            <Item.Header as={Link} to={`/activities/${activity.id}`}>
+                            <Item.Header as={Link} to={`/quotes/${activity.id}`}>
                                 {activity.title}
                             </Item.Header>
                             <Item.Description>Hosted By <Link to={`/profiles/${activity.hostUsername}`}>{activity.host?.displayName}</Link></Item.Description>
@@ -51,7 +51,7 @@ export default function ActivityListItem({ activity }: Props) {
                 <span>{activity.description}</span>
                 <Button
                     as={Link}
-                    to={`/activities/${activity.id}`}
+                    to={`/quotes/${activity.id}`}
                     color='orange'
                     floated='right'
                     content='View' />

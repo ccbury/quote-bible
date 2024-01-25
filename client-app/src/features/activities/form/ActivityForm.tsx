@@ -20,11 +20,11 @@ export default observer(function ActivityForm() {
     const { id } = useParams();
     const navigate = useNavigate();
 
-    const [activity, setActivity] = useState<ActivityFormValues>(new ActivityFormValues());
+    const [ activity, setActivity ] = useState<ActivityFormValues>(new ActivityFormValues());
 
     useEffect(() => {
         if (id) loadActivity(id).then(activity => setActivity(new ActivityFormValues(activity)));
-    }, [id, loadActivity])
+    }, [ id, loadActivity ])
 
     const validationsSchema = Yup.object({
         title: Yup.string().required('Activity Title is required'),
@@ -42,9 +42,9 @@ export default observer(function ActivityForm() {
                 id: uuid()
             };
             activity.id = uuid();
-            createActivity(newActivity).then(() => navigate(`/activities/${newActivity.id}`));
+            createActivity(newActivity).then(() => navigate(`/quotes/${newActivity.id}`));
         } else {
-            updateActivity(activity).then(() => navigate(`/activities/${activity.id}`));
+            updateActivity(activity).then(() => navigate(`/quotes/${activity.id}`));
         }
     }
 
@@ -53,7 +53,7 @@ export default observer(function ActivityForm() {
 
     return (
         <Segment clearing style={{ width: '80%', margin: 'auto', marginTop: '8rem' }}>
-            <Header content='Activity Details' sub color='teal' />
+            <Header content='Quote Details' sub color='orange' />
             <Formik
                 validationSchema={validationsSchema}
                 enableReinitialize
@@ -70,7 +70,7 @@ export default observer(function ActivityForm() {
                             showTimeSelect
                             timeCaption='time'
                             dateFormat='MMMM d, yyyy h:mm aa' />
-                        <Header content='Location Details' sub color='teal' />
+                        <Header content='Quote Location Details' sub color='orange' />
                         <MyTextInput placeholder='City' name='city' />
                         <MyTextInput placeholder='Venue' name='venue' />
                         <Button
@@ -82,7 +82,7 @@ export default observer(function ActivityForm() {
                             content='Submit' />
                         <Button
                             as={Link}
-                            to='/activities'
+                            to='/quotes'
                             floated='right'
                             type='button'
                             content='Cancel' />

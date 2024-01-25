@@ -10,8 +10,8 @@ export default function NotFound() {
                 <p>Quote Bible is in Beta, please report this error..</p>
             </Header>
             <Segment.Inline>
-                <Button as={Link} to='/activities'>
-                    Return to activities
+                <Button as={Link} to='/quotes'>
+                    Return to Quotes
                 </Button>
             </Segment.Inline>
         </Segment>

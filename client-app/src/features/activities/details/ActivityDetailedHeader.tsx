@@ -25,7 +25,7 @@ interface Props {
 
 export default observer(function ActivityDetailedHeader({ activity }: Props) {
     const { activityStore: { updateAttendance, loading, deleteActivity } } = useStore();
-    const [deleteFlag, setDeleteFlag] = useState(false);
+    const [ deleteFlag, setDeleteFlag ] = useState(false);
     const toggleDeleteFlag = async () => {
         setDeleteFlag(!deleteFlag)
     };
@@ -58,7 +58,7 @@ export default observer(function ActivityDetailedHeader({ activity }: Props) {
                 {activity.isHost ? (
                     <>
                         <Button color={'red'} floated='left' basic content={!deleteFlag ? 'Delete Quote' : 'Cancel'} loading={loading} onClick={toggleDeleteFlag} />
-                        {deleteFlag ? (<Button onClick={deleteActivity} as={Link} to={`/activities`} color='red' floated='right'>
+                        {deleteFlag ? (<Button onClick={deleteActivity} as={Link} to={`/quotes`} color='red' floated='right'>
                             Confirm Delete
                         </Button>) : (<Button as={Link} to={`/manage/${activity.id}`} color='orange' floated='right'>
                             Manage Quote

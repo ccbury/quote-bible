@@ -26,8 +26,8 @@ export default observer(function NavBar() {
                 </Menu.Item>
                 <Menu.Item
                     as={NavLink}
-                    to='/activities'
-                    name='Activities' />
+                    to='/quotes'
+                    name='Quotes' />
                 <Menu.Item
                     as={NavLink}
                     to='/errors'

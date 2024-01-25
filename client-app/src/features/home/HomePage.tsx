@@ -17,7 +17,7 @@ export default observer(function HomePage() {
                 </Header>
                 {userStore.isLoggedIn ? (
                     <>
-                        <Button as={Link} to='/activities' size='huge' inverted content='Go to Activities' sx={{ mt: '40rem' }} />
+                        <Button as={Link} to='/quotes' size='huge' inverted content='Go to Quotes' sx={{ mt: '40rem' }} />
                     </>
                 ) : (
                     <>
