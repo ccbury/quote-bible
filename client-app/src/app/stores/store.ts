@@ -4,7 +4,7 @@ import CommonStore from "./commonStore";
 import UserStore from "./userStore";
 import ModalStore from "./modalStore";
 import CommentStore from "./commentStore";
-import ProfileStore from "./ProfileStore";
+import ProfileStore from "./profileStore";
 
 interface Store {
   activityStore: ActivityStore;

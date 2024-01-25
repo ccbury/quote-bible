@@ -13,7 +13,7 @@ export default observer(function HomePage() {
             <Container text>
                 <Header as='h1' inverted>
                     <Image size='massive' src='assets/bible.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
-                    Quotee
+                    Quote Bible
                 </Header>
                 {userStore.isLoggedIn ? (
                     <>
