@@ -19,7 +19,7 @@ export default observer(function ActivityDetailedSidebar({ activity: { attendees
                 inverted
                 color='orange'
             >
-                {attendees.length} {attendees.length === 1 ? 'Person' : 'People'} Going
+                {attendees.length} {attendees.length === 1 ? 'Person' : 'People'} Attended
             </Segment>
             <Segment attached>
                 <List relaxed divided>
@@ -32,7 +32,7 @@ export default observer(function ActivityDetailedSidebar({ activity: { attendees
                                     color='red'
                                     ribbon='right'
                                 >
-                                    Host
+                                    Poster
                                 </Label>)}
 
                                 <Image size='tiny' src={attendee.image || '/assets/user.png'} />

@@ -6,6 +6,7 @@ import ProfileCard from "./ProfileCard";
 export default observer(function ProfileFollowings() {
     const { profileStore } = useStore();
     const { profile, followings, loadingFollowings, activeTab } = profileStore;
+    const isMobile = window.screen.width <= 768;
 
     return (
         <Tab.Pane loading={loadingFollowings}>
@@ -14,7 +15,7 @@ export default observer(function ProfileFollowings() {
                     <Header floated='left' icon='user' content={activeTab === 3 ? `People following ${profile?.displayName}` : `People ${profile?.displayName} follows`} />
                 </Grid.Column>
                 <Grid.Column width={16}>
-                    <Card.Group itemsPerRow={4}>
+                    <Card.Group itemsPerRow={isMobile ? 2 : 4}>
                         {followings.map(profile => (
                             <ProfileCard key={profile.username} profile={profile} />
                         ))}

@@ -38,4 +38,5 @@ export interface UserActivity {
   title: string;
   category: string;
   date: Date;
+  description: string;
 }

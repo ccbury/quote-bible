@@ -12,3 +12,13 @@ Use `dotnet restore` to update dotnet projects when imports are not working
 
 in root run
 `dotnet ef migrations add PostgresInitial -p Persistence -s API`
+
+# Creating a new production build & pushing to prod
+
+In client app:
+`npm run build`
+
+in root:
+`docker build -t ccbury/quotebible:latest .`
+`docker push ccbury/quotebible:latest`
+`flyctl deploy`

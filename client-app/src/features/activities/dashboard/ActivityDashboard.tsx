@@ -15,7 +15,7 @@ export default observer(function ActivityDashboard() {
     const { activityStore } = useStore();
     const { loadActivities, activityRegistry, setPagingParams, pagination } = activityStore;
     const [ loadingNext, setLoadingNext ] = useState(false);
-
+    const isMobile = window.screen.width <= 768;
     function handleGetNext() {
         setLoadingNext(true);
         setPagingParams(new PagingParams(pagination!.currentPage + 1))
@@ -27,7 +27,12 @@ export default observer(function ActivityDashboard() {
     }, [ loadActivities, activityRegistry ])
     return (
         <Grid>
-            <Grid.Column width='12'>
+            <Grid.Column width={isMobile ? '16' : '12'}>
+                {isMobile && (
+                    <Grid.Column width='16' marginBottom={'10em'}>
+                        <ActivityFilters />
+                    </Grid.Column>
+                )}
                 {activityStore.loadingInitial && !loadingNext && activityRegistry.size === 0 ? (
                     <>
                         <ActivityListItemPlaceholder />
@@ -40,9 +45,12 @@ export default observer(function ActivityDashboard() {
                 )}
 
             </Grid.Column>
-            <Grid.Column width='4'>
-                <ActivityFilters />
-            </Grid.Column>
+            {!isMobile && (
+                <Grid.Column width='4'>
+                    <ActivityFilters />
+                </Grid.Column>
+            )}
+
             <Grid.Column width={10}><Loader active={loadingNext} /></Grid.Column>
         </Grid>
     )

@@ -13,6 +13,8 @@ const panes = [
 
 export default observer(function ProfileActivities() {
     const { profileStore } = useStore();
+    const isMobile = window.screen.width <= 768;
+
     const {
         loadUserActivities,
         profile,
@@ -41,7 +43,7 @@ export default observer(function ProfileActivities() {
                         onTabChange={(e, data) => handleTabChange(e, data)}
                     />
                     <br />
-                    <Card.Group itemsPerRow={4}>
+                    <Card.Group itemsPerRow={isMobile ? 2 : 4}>
                         {userActivities.map((activity: UserActivity) => (
                             <Card
                                 as={Link}

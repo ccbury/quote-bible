@@ -33,6 +33,7 @@ function App() {
       <ToastContainer position='bottom-right' hideProgressBar theme='colored' />
       {location.pathname === '/' ? <HomePage /> : (
         <>
+          { }
           <NavBar />
           <Container className='container' style={{ marginTop: '5em' }}>
             <Outlet />

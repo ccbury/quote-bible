@@ -12,6 +12,7 @@ export default observer(function ProfilePhotos({ profile }: Props) {
     const { profileStore: { isCurrentUser, uploadPhoto, uploading, loading, setMainPhoto, deletePhoto } } = useStore();
     const [ addPhotoMode, setAddPhotoMode ] = useState(false);
     const [ target, setTarget ] = useState('');
+    const isMobile = window.screen.width <= 768;
 
     function handlePhotoUpload(file: Blob) {
         uploadPhoto(file).then(() => setAddPhotoMode(false));
@@ -40,7 +41,7 @@ export default observer(function ProfilePhotos({ profile }: Props) {
                     {addPhotoMode ? (
                         <PhotoUploadWidget uploadPhoto={handlePhotoUpload} loading={uploading} />
                     ) : (
-                        <Card.Group itemsPerRow={5}>
+                        <Card.Group itemsPerRow={isMobile ? 2 : 5}>
                             {profile.photos?.map(photo => (
                                 <Card key={photo.id}>
                                     <Image src={photo.url} />

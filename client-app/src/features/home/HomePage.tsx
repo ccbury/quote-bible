@@ -12,7 +12,7 @@ export default observer(function HomePage() {
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
                 <Header as='h1' inverted>
-                    <Image size='massive' src='assets/bible.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
+                    <Image size='huge' src='/assets/bible.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
                     Quote Bible
                 </Header>
                 {userStore.isLoggedIn ? (
@@ -24,7 +24,6 @@ export default observer(function HomePage() {
                         <Button onClick={() => modalStore.openModal(<LoginForm />)} size='huge' inverted content='Login' />
                         <Button onClick={() => modalStore.openModal(<RegisterForm />)} size='huge' inverted content='Register' />
                     </>
-
                 )}
 
             </Container>

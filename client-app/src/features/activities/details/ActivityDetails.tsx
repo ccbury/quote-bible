@@ -14,6 +14,8 @@ export default observer(function ActivityDetails() {
     const { activityStore } = useStore();
     const { selectedActivity: activity, loadActivity, loadingInitial, clearSelectedActivity } = activityStore;
     const { id } = useParams();
+    const isMobile = window.screen.width <= 768;
+
 
     useEffect(() => {
         if (id) loadActivity(id)
@@ -24,14 +26,23 @@ export default observer(function ActivityDetails() {
 
     return (
         <Grid>
-            <Grid.Column width={10}>
+            <Grid.Column width={isMobile ? 16 : 10}>
                 <ActivityDetailedHeader activity={activity} />
                 <ActivityDetailedInfo activity={activity} />
+                {isMobile && (
+                    <ActivityDetailedSidebar activity={activity} />
+                )}
                 <ActivityDetailedChat activityId={activity.id} />
             </Grid.Column>
-            <Grid.Column width={6}>
-                <ActivityDetailedSidebar activity={activity} />
-            </Grid.Column>
+            {
+                !isMobile && (
+                    <Grid.Column width={6}>
+                        <ActivityDetailedSidebar activity={activity} />
+                    </Grid.Column>
+                )
+            }
+
+
         </Grid>
     )
 })
