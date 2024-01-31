@@ -12,7 +12,7 @@ export default observer(function HomePage() {
         <Segment inverted textAlign='center' vertical className='masthead'>
             <Container text>
                 <Header as='h1' inverted>
-                    <Image size='huge' src='/assets/bible.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
+                    <Image size='huge' src='https://res.cloudinary.com/dolmv7ozw/image/upload/v1706577206/owyv31k185oi1f6afif9.png' alt='logo' style={{ marginBottom: 12, marginRight: 25 }} />
                     Quote Bible
                 </Header>
                 {userStore.isLoggedIn ? (

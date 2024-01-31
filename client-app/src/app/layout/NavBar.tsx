@@ -1,4 +1,4 @@
-import { Button, Container, Menu, Image, Dropdown } from 'semantic-ui-react';
+import { Container, Menu, Image, Dropdown } from 'semantic-ui-react';
 
 import './styles.css'
 import { Link, NavLink } from 'react-router-dom';
@@ -16,25 +16,20 @@ export default observer(function NavBar() {
                 fixed='top'
                 maxWidth={window.screen.width} >
                 <Container>
-                    <img
-                        src='assets/bible.png'
+                    <Dropdown pointing="top left" icon={<Image
+                        src='https://res.cloudinary.com/dolmv7ozw/image/upload/v1706661562/psynsnhwdhywsl6vkdet.png'
                         alt='logo'
-                        height="35em"
-                        width="35em"
-                        style={{ marginTop: 'auto', marginBottom: 'auto', marginRight: '1rem', marginLeft: '3rem' }} />
-                    <Menu.Item
-                        as={NavLink}
-                        to='/'
-                        header>
-                        Home
-                    </Menu.Item>
-                    <Menu.Item
-                        as={NavLink}
-                        to='/quotes'
-                        name='Quote List' />
+                        height='30em'
+                        width='35em'
+                        style={{ marginLeft: '1em', marginTop: '1em', marginBottom: '1em' }} />}>
+                        <Dropdown.Menu >
+                            <Dropdown.Item as={Link} to={`/`} text='Home' icon='home' />
+                            <Dropdown.Item as={Link} to={`/quotes`} text='Quotes' icon='stack exchange' />
+                            <Dropdown.Item as={Link} to={`/createActivity`} text='New Quote' icon='plus' />
+                        </Dropdown.Menu>
+                    </Dropdown>
                     <Menu.Item position='right'>
-                        <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
-                        <Dropdown pointing="top right">
+                        <Dropdown pointing="top right" icon={<Image src={user?.image || '/assets/user.png'} avatar spaced='right' />}>
                             <Dropdown.Menu >
                                 <Dropdown.Item as={Link} to={`/profiles/${user?.username}`} text='My Profile' icon='user' />
                                 <Dropdown.Item onClick={logout} text='Logout' icon='power' />
@@ -68,13 +63,16 @@ export default observer(function NavBar() {
                     as={NavLink}
                     to='/errors'
                     name='Errors' /> */}
-                    <Menu.Item>
-                        <Button
+                    <Menu.Item
+                        as={NavLink}
+                        to='/createActivity'
+                        name='New Quote' />
+                    {/* <Button
                             as={NavLink}
                             to='/createActivity'
                             color='orange'
-                            content='New Quote' />
-                    </Menu.Item>
+                            content='New Quote' /> */}
+                    {/* </Menu.Item> */}
                     <Menu.Item position='right'>
                         <Image src={user?.image || '/assets/user.png'} avatar spaced='right' />
                         <Dropdown pointing="top left" text={user?.displayName}>
