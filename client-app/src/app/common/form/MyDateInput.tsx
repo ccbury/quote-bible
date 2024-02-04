@@ -3,7 +3,7 @@ import { Form, Label } from "semantic-ui-react";
 import DatePicker, { ReactDatePickerProps } from 'react-datepicker'
 
 export default function MyTextInput(props: Partial<ReactDatePickerProps>) {
-    const [field, meta, helpers] = useField(props.name!);
+    const [ field, meta, helpers ] = useField(props.name!);
     return (
         <Form.Field error={meta.touched && !!meta.error}>
             <DatePicker
@@ -11,6 +11,8 @@ export default function MyTextInput(props: Partial<ReactDatePickerProps>) {
                 {...props}
                 selected={(field.value && new Date(field.value)) || null}
                 onChange={value => helpers.setValue(value)}
+                maxDate={new Date()}
+                withPortal
             />
 
             {meta.touched && meta.error ? (

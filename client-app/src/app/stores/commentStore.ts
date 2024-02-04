@@ -10,6 +10,7 @@ import { store } from "./store";
 export default class CommentStore {
   comments: ChatComment[] = [];
   hubConnection: HubConnection | null = null;
+  playSound: boolean = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -43,6 +44,7 @@ export default class CommentStore {
       this.hubConnection.on("ReceiveComment", (comment: ChatComment) => {
         runInAction(() => {
           comment.createdAt = new Date(comment.createdAt);
+          this.playSound = true;
           this.comments.unshift(comment);
         });
       });

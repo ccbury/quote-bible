@@ -27,7 +27,7 @@ namespace API.Controllers
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
             var user = await _userManager.Users.Include(p => p.Photos)
-                .FirstOrDefaultAsync(x => x.Email == loginDto.Email);
+                .FirstOrDefaultAsync(x => x.Email.ToLower() == loginDto.Email.ToLower());
 
             if (user == null) return Unauthorized();
 
@@ -49,7 +49,7 @@ namespace API.Controllers
                 ModelState.AddModelError("username", "Username taken");
                 return ValidationProblem();
             }
-            if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
+            if (await _userManager.Users.AnyAsync(x => x.Email.ToLower() == registerDto.Email.ToLower()))
             {
                 ModelState.AddModelError("email", "Email taken");
                 return ValidationProblem();

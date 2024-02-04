@@ -6,6 +6,9 @@ import { Formik, Form, Field, FieldProps } from 'formik';
 import { Link } from 'react-router-dom';
 import * as Yup from 'yup';
 import { formatDistance } from 'date-fns';
+import { Howl } from 'howler';
+// import postSoundFile from '/assets/sounds/postMessage.mp3'
+import messageSoundFile from '/assets/sounds/newMessage.ogg'
 
 interface Props {
     activityId: string;
@@ -13,7 +16,23 @@ interface Props {
 
 export default observer(function ActivityDetailedChat({ activityId }: Props) {
     const { commentStore } = useStore();
-
+    // const postSound = new Howl({
+    //     src: [ postSoundFile ],
+    //     volume: 0.2,
+    //     preload: true,
+    //     rate: 2,
+    //     html5: true
+    // });
+    const messageSound = new Howl({
+        src: [ messageSoundFile ],
+        volume: 0.2,
+        preload: true,
+        rate: 1.5,
+        html5: true
+    });
+    function timeout(delay: number) {
+        return new Promise(res => setTimeout(res, delay));
+    }
     useEffect(() => {
         if (activityId) {
             commentStore.createHubConnection(activityId);
@@ -22,6 +41,13 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
             commentStore.clearComments();
         }
     }, [ commentStore, activityId ]);
+    useEffect(() => {
+        if (commentStore.playSound === true) {
+            { messageSound.play() }
+            timeout(1000)
+            commentStore.playSound = false;
+        }
+    }, [ commentStore.playSound ])
 
     return (
         <>
@@ -30,11 +56,9 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                 attached='top'
                 inverted
                 color='orange'
-                style={{ border: 'none' }}
-            >
+                style={{ border: 'none' }}>
                 <Header>Chat about this quote!</Header>
             </Segment>
-
             <Segment attached clearing>
                 <Formik
                     onSubmit={(values, { resetForm }) => commentStore.addComment(values).then(() => resetForm())}
@@ -58,6 +82,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                                                 }
                                                 if (e.key === 'Enter' && !e.shiftKey) {
                                                     e.preventDefault();
+                                                    // { postSound.play() }
                                                     isValid && handleSubmit();
                                                 }
                                             }} />
@@ -75,6 +100,7 @@ export default observer(function ActivityDetailedChat({ activityId }: Props) {
                                 <Comment.Author as={Link} to={`/profiles/${comment.username}`}>{comment.displayName}</Comment.Author>
                                 <Comment.Metadata>
                                     <div>{formatDistance(new Date(comment.createdAt), new Date())} ago</div>
+
                                 </Comment.Metadata>
                                 <Comment.Text style={{ whiteSpace: 'pre-wrap' }}>{comment.body}</Comment.Text>
                             </Comment.Content>

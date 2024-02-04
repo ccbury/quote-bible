@@ -6,6 +6,7 @@ import { useStore } from "../../app/stores/store";
 
 export default observer(function LoginForm() {
     const { userStore } = useStore();
+
     return (
         <Formik
             initialValues={{ email: '', password: '', error: null }}
@@ -16,7 +17,7 @@ export default observer(function LoginForm() {
                 <Form className='ui form' onSubmit={handleSubmit} autoComplete='off'>
                     <Header as='h2' content='Login to Reactivities' color="teal" textAlign="center" />
                     <MyTextInput placeholder="Email" name='email' />
-                    <MyTextInput placeholder="Password" name='password' type='password' />
+                    <MyTextInput placeholder="Password" name='password' />
                     <ErrorMessage name='error' render={() =>
                         <Label style={{ marginBottom: 10 }} basic color='red' content={errors.error} />} />
                     <Button loading={isSubmitting} positive content='Login' type="submit" fluid />
